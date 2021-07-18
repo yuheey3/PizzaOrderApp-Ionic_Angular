@@ -1,20 +1,22 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>Pizza App</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-label>Yuki</ion-label>
+  <ion-img src="../assets/icon/pizzaImage.jpeg"></ion-img>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<!-- <ion-list>
+  <ion-item *ngFor="let recipe of recipes" [routerLink]="['./',recipe.id]">
+    <ion-avatar slot="start">
+      <ion-img [src]="recipe.imageUrl">
+      </ion-img>
+    </ion-avatar>
+    <ion-label>
+      {{recipe.title}}
+    </ion-label>
+  </ion-item>
+</ion-list> -->
 </ion-content>
