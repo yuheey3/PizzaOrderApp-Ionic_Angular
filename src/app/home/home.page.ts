@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Topping,Size,Pizza } from './home.model';
 import { HomeService } from './home.service';
 import { AlertController } from '@ionic/angular';
+import { Router}  from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -26,7 +27,7 @@ export class HomePage implements OnInit {
   toppingLbl:string;
   sizeLbl:string;
 
-  constructor(private homeService: HomeService, public alertController: AlertController ) { }
+  constructor(private homeService: HomeService, public alertController: AlertController, private router: Router ) { }
 
   ngOnInit() {
     this.pizzaPrice = 3.5;
@@ -67,7 +68,12 @@ export class HomePage implements OnInit {
     this.sizeLbl = "None"
   }
 
-  async clickBuy(){
+  clickManager(){
+
+    this.router.navigate(['manager']);
+  }
+
+  async clickAdd(){
   if(this.qtyNum == "None" || this.sizeLbl == "None"){
       const alert = await this.alertController.create({
         header: 'Missing Info',
@@ -97,7 +103,7 @@ export class HomePage implements OnInit {
      this.pizza.size = this.sizeLbl;
      this.pizza.topping = this.toppingLbl;
      this.pizza.total = this.pizzaTotal;
-     
+
      this.pizzas.push(Object.assign({},this.pizza));
 
 

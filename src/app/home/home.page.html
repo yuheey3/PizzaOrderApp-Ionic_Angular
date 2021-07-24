@@ -11,7 +11,7 @@
         <ion-img src="../assets/icon/pizzaImage.jpeg"></ion-img>
       </ion-col>
       <ion-col>
-        <ion-button id="btn-myOrder">My Order</ion-button>
+        <ion-button id="btn-myOrder" (click)="clickManager()">Manager</ion-button>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -64,7 +64,7 @@
         <ion-button color="light" (click)="clickEvent(0)">0</ion-button>
       </ion-col>
       <ion-col class="ion-text-center">
-        <ion-button color="success"(click)="clickBuy()">BUY</ion-button>
+        <ion-button color="success"(click)="clickAdd()">Add</ion-button>
       </ion-col>
       <ion-col></ion-col>
     </ion-row>
