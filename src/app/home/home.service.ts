@@ -53,8 +53,8 @@ export class HomeService {
      {
        id:'p1',
        qty:0,
-       topping:'initial',
-       size: 'initial',
+       topping:'None',
+       size: 'None',
        total:0
      }
    ];
@@ -62,8 +62,8 @@ export class HomeService {
    private pizza: Pizza = {
     id:'p1',
     qty:0,
-    topping:'initial',
-    size: 'initial',
+    topping:'None',
+    size: 'None',
     total:0
    }
 
@@ -114,6 +114,18 @@ export class HomeService {
       )
     }
   }
+
+  clearPizzaOrderList(){
+    this.pizzas.length = 1;
+  }
+
+  clearPizzaOrder(){
+    this.pizza.qty = 0;
+    this.pizza.size = "None";
+    this.pizza.topping = "None";
+    this.pizza.total = 0;
+  }
+ 
 }
 
 

@@ -30,6 +30,7 @@ export class HomePage implements OnInit {
   constructor(private homeService: HomeService, public alertController: AlertController, private router: Router ) { }
 
   ngOnInit() {
+
     this.pizzaPrice = 3.5;
     this.pizzaId = 0;
     this.totalQty = 0;
@@ -38,15 +39,20 @@ export class HomePage implements OnInit {
     this.sizes = this.homeService.getAllSizes();
     this.pizzas = this.homeService.getAllPizzas();
     this.pizza = this.homeService.getPizza();
+    this.toppingLbl = this.pizza.topping;
+    this.sizeLbl = this.pizza.size;
+    this.qtyNum = this.pizza.qty.toString();
   }
 
 
    clickEvent(event){
      if(event== 10){
-       this.qtyNum = "None";
+       this.pizza.qty = 0;
+       this.qtyNum = this.pizza.qty.toString();
      }
      else{
-      this.qtyNum=event;
+      this.pizza.qty = event;
+      this.qtyNum=this.pizza.qty.toString();
      }
     
     return this.qtyNum;
@@ -54,28 +60,37 @@ export class HomePage implements OnInit {
 
 
   clickToppingList(event){
-    this.toppingLbl = event;
+    this.pizza.topping = event
+    this.toppingLbl = this.pizza.topping;
     return this.toppingLbl;
   }
 
   clickSizeList(event){
-    this.sizeLbl = event;
+    this.pizza.size = event;
+    this.sizeLbl = this.pizza.size;
     return this.sizeLbl;
   }
 
   clickReset(){
-    this.qtyNum = "None"
-    this.toppingLbl = "None"
-    this.sizeLbl = "None"
+    this.pizza.qty = 0;
+    this.pizza.topping = 'None';
+    this.pizza.size = 'None';
+    this.qtyNum = this.pizza.qty.toString();
+    this.toppingLbl = this.pizza.topping;
+    this.sizeLbl = this.pizza.size;
   }
 
   clickManager(){
 
+    this.homeService.clearPizzaOrder(); 
+    this.qtyNum = this.pizza.qty.toString();
+    this.sizeLbl = this.pizza.size;
+    this.toppingLbl = this.pizza.topping;   
     this.router.navigate(['manager']);
   }
 
   async clickAdd(){
-  if(this.qtyNum == "None" || this.sizeLbl == "None"){
+  if(this.pizza.qty.toString() == "None" || this.pizza.size == "None"){
       const alert = await this.alertController.create({
         header: 'Missing Info',
         message: 'You have to add all information!',
@@ -87,6 +102,7 @@ export class HomePage implements OnInit {
         }]
       });
       await alert.present();
+
   }
   else{
    
@@ -94,19 +110,20 @@ export class HomePage implements OnInit {
      this.totalPrice = 0;
      this.totalQty = 0;
      this.pizzaId++;
-     this.topping = this.homeService.getToppingByName(this.toppingLbl);
-     this.size = this.homeService.getSizeByName(this.sizeLbl);
+     this.topping = this.homeService.getToppingByName(this.pizza.topping);
+     this.size = this.homeService.getSizeByName(this.pizza.size);
 
-     this.pizzaTotal = this.pizzaPrice*Number(this.qtyNum)+this.topping.price + this.size.price;
+     this.pizzaTotal = this.pizzaPrice*this.pizza.qty+this.topping.price + this.size.price;
 
      this.pizza.id = this.pizzaId.toString();
-     this.pizza.qty = Number(this.qtyNum);
-     this.pizza.size = this.sizeLbl;
-     this.pizza.topping = this.toppingLbl;
+    //  this.pizza.qty = Number(this.qtyNum);
+    //  this.pizza.size = this.sizeLbl;
+    //  this.pizza.topping = this.toppingLbl;
      this.pizza.total = this.pizzaTotal;
 
      this.homeService.pushPizzas(Object.assign({},this.pizza));
      this.pizzas = this.homeService.getAllPizzas();
+     //this.pizzas.slice();
 
     for (let x = 1; x < this.pizzas.length; x++) {
       this.totalQty += this.pizzas[x].qty; 
@@ -124,7 +141,14 @@ export class HomePage implements OnInit {
       }]
     });
     await alert2.present()
-     
+
+
+    this.homeService.clearPizzaOrder(); 
+    this.qtyNum = this.pizza.qty.toString();
+    this.sizeLbl = this.pizza.size;
+    this.toppingLbl = this.pizza.topping;   
+
+   
   }
 
   }

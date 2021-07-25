@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router}  from '@angular/router';
+import { HomeService } from '../home/home.service';
 
 @Component({
   selector: 'app-manager',
@@ -8,9 +9,10 @@ import { Router}  from '@angular/router';
 })
 export class ManagerPage implements OnInit {
 
-  constructor(private router: Router ) { }
+  constructor( private router: Router, private homesService: HomeService ) { }
 
   ngOnInit() {
+    
   }
 
   clickCurrent(){
@@ -22,6 +24,8 @@ export class ManagerPage implements OnInit {
     this.router.navigate(['history']);
   }
   clickNewOrder(){
+    this.homesService.clearPizzaOrderList();
+    this.homesService.clearPizzaOrder();
     this.router.navigate(['home']);
   }
   clickUpdate(){

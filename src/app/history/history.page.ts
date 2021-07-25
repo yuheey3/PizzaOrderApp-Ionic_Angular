@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
+import { CurrentService } from '../current/current.service';
+import { HistoryService } from '../history/history.service';
+import { History } from '../current/current.model';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-history',
@@ -7,9 +13,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoryPage implements OnInit {
 
-  constructor() { }
+  allHistoryList: History[];
+ 
+
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private currentService: CurrentService, private historyService: HistoryService, public alertController: AlertController) { }
 
   ngOnInit() {
-  }
+    this.activatedRoute.paramMap.subscribe(paramMap => {
 
+    this.allHistoryList = this.currentService.getAllHistory();
+    this.allHistoryList.shift();
+
+    })
+  }
 }
+
