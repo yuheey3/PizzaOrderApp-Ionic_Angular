@@ -52,6 +52,7 @@ export class HomePage implements OnInit {
     return this.qtyNum;
   }
 
+
   clickToppingList(event){
     this.toppingLbl = event;
     return this.toppingLbl;
@@ -104,8 +105,8 @@ export class HomePage implements OnInit {
      this.pizza.topping = this.toppingLbl;
      this.pizza.total = this.pizzaTotal;
 
-     this.pizzas.push(Object.assign({},this.pizza));
-
+     this.homeService.pushPizzas(Object.assign({},this.pizza));
+     this.pizzas = this.homeService.getAllPizzas();
 
     for (let x = 1; x < this.pizzas.length; x++) {
       this.totalQty += this.pizzas[x].qty; 

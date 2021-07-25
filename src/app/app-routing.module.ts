@@ -15,6 +15,15 @@ const routes: Routes = [
     path: 'manager',
     loadChildren: () => import('./manager/manager.module').then( m => m.ManagerPageModule)
   },
+
+  {
+    path: 'current',
+    loadChildren: () => import('./current/current.module').then( m => m.CurrentPageModule)
+  },
+  {
+    path: 'history',
+    loadChildren: () => import('./history/history.module').then( m => m.HistoryPageModule)
+  },
 ];
 
 @NgModule({

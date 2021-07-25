@@ -72,6 +72,10 @@ export class HomeService {
     return [...this.pizzas];
   }
 
+  pushPizzas(p: Pizza){
+    this.pizzas.push(p);
+  }
+
   getPizza() {
     return this.pizza;
   }
