@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { CurrentService } from '../current/current.service';
-import { HistoryService } from '../history/history.service';
 import { History } from '../current/current.model';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +15,7 @@ export class HistoryPage implements OnInit {
   allHistoryList: History[];
  
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private currentService: CurrentService, private historyService: HistoryService, public alertController: AlertController) { }
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private currentService: CurrentService, public alertController: AlertController) { }
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(paramMap => {
